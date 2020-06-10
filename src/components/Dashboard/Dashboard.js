@@ -12,6 +12,7 @@ class Dashboard extends Component {
       userPosts: true,
       posts: [],
     };
+    this.delete = this.delete.bind(this)
   }
 
   componentDidMount() {
@@ -28,6 +29,16 @@ class Dashboard extends Component {
         });
       })
       .catch((err) => console.log(err));
+  }
+
+  delete(postid) {
+    axios.delete(`/api/post/${postid}`)
+    .then(res => {
+        this.setState({
+            posts: res.data
+        })
+        this.props.history.push('/dashboard')
+    })
   }
 
   render() {
@@ -57,7 +68,7 @@ class Dashboard extends Component {
         </div>
         <div className="post-container">
           {posts.map((e, i) => (
-            <div key={i} className="post-container-sole">
+            <div deleteProduct={this.delete} key={i} className="post-container-sole">
               <div className="title-container">
               <h2 className="post-title"><Link to={{pathname: `/post/${e.post_id}`}} className="post-title">{e.title}</Link></h2>
               </div>

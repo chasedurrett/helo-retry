@@ -34,7 +34,7 @@ module.exports = {
     const db = req.app.get("db");
     const { search, userPosts } = req.query;
     const { id } = req.session.user;
-    let posts
+    let posts;
     if (!req.session.user) {
       return res.sendStatus(404);
     }
@@ -52,4 +52,23 @@ module.exports = {
     const post = await db.get_post(postid);
     res.status(200).send(post[0]);
   },
+  createPost: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const { title, img, content } = req.body;
+    const newPost = await db.create_post(title, img, content, id);
+    if (newPost[0]) {
+      res.sendStatus(200);
+    }
+  },
+  deletePost: async (req, res) => {
+      const db = req.app.get('db')
+      const {postid} = req.params
+
+      const posts = await db.delete_post(postid)
+      if(posts[0]){
+          res.sendStatus(200)
+      }
+
+    }
 };

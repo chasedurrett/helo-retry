@@ -18,6 +18,8 @@ app.post('/api/auth/register', ctrl.registerUser)
 app.post('/api/auth/login', ctrl.loginUser)
 app.get('/api/post/:postid', ctrl.getPost)
 app.get('/api/posts', ctrl.getPosts)
+app.post('/api/post', ctrl.createPost)
+app.delete(`/api/post/:postid`, ctrl.deletePost)
 
 
 massive({

@@ -12,19 +12,21 @@ class Post extends Component {
       content: "",
       author: "",
       profile_pic: "",
+      post_id: ''
     };
   }
 
   getPost() {
     const { postid } = this.props.match.params;
     axios.get(`/api/post/${postid}`).then((res) => {
-      const { title, img, content, author, profile_pic } = res.data;
+      const { title, img, content, author, profile_pic, post_id } = res.data;
       this.setState({
         title,
         img,
         content,
         author,
         profile_pic,
+        post_id
       });
     });
   }
@@ -33,8 +35,10 @@ class Post extends Component {
     this.getPost();
   }
 
+  
+
   render() {
-    const { title, img, content, author, profile_pic } = this.state;
+    const { title, img, content, author, profile_pic, post_id } = this.state;
     console.log(this.state);
     return (
       <div className="post-section">
@@ -54,6 +58,7 @@ class Post extends Component {
               <p>{content}</p>
             </div>
           </div>
+          <div><button onClick={() => this.props.deletePost(post_id)}>Delete</button></div>
         </div>
       </div>
     );
