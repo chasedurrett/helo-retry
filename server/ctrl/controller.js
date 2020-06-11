@@ -62,13 +62,12 @@ module.exports = {
     }
   },
   deletePost: async (req, res) => {
-      const db = req.app.get('db')
-      const {postid} = req.params
+    const db = req.app.get("db");
+    const { postid } = req.params;
 
-      const posts = await db.delete_post(postid)
-      if(posts[0]){
-          res.sendStatus(200)
-      }
-
+    const posts = await db.delete_post(postid);
+    if (posts[0]) {
+      res.sendStatus(200);
     }
+  },
 };

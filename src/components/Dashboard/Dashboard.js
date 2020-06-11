@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Dashboard extends Component {
@@ -12,7 +12,7 @@ class Dashboard extends Component {
       userPosts: true,
       posts: [],
     };
-    this.delete = this.delete.bind(this)
+    this.delete = this.delete.bind(this);
   }
 
   componentDidMount() {
@@ -32,13 +32,12 @@ class Dashboard extends Component {
   }
 
   delete(postid) {
-    axios.delete(`/api/post/${postid}`)
-    .then(res => {
-        this.setState({
-            posts: res.data
-        })
-        this.props.history.push('/dashboard')
-    })
+    axios.delete(`/api/post/${postid}`).then((res) => {
+      this.setState({
+        posts: res.data,
+      });
+      this.props.history.push("/dashboard");
+    });
   }
 
   render() {
@@ -68,13 +67,28 @@ class Dashboard extends Component {
         </div>
         <div className="post-container">
           {posts.map((e, i) => (
-            <div deleteProduct={this.delete} key={i} className="post-container-sole">
+            <div
+              deleteProduct={this.delete}
+              key={i}
+              className="post-container-sole"
+            >
               <div className="title-container">
-              <h2 className="post-title"><Link to={{pathname: `/post/${e.post_id}`}} className="post-title">{e.title}</Link></h2>
+                <h2 className="post-title">
+                  <Link
+                    to={{ pathname: `/post/${e.post_id}` }}
+                    className="post-title"
+                  >
+                    {e.title}
+                  </Link>
+                </h2>
               </div>
               <div className="post-author-photo-container">
                 <h4 className="by-author">by {e.author}</h4>
-                <img className="profile-pic" alt="profile-pic" src={e.profile_pic} />
+                <img
+                  className="profile-pic"
+                  alt="profile-pic"
+                  src={e.profile_pic}
+                />
               </div>
             </div>
           ))}

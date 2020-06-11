@@ -12,7 +12,7 @@ class Post extends Component {
       content: "",
       author: "",
       profile_pic: "",
-      post_id: ''
+      post_id: "",
     };
   }
 
@@ -26,7 +26,7 @@ class Post extends Component {
         content,
         author,
         profile_pic,
-        post_id
+        post_id,
       });
     });
   }
@@ -34,8 +34,6 @@ class Post extends Component {
   componentDidMount() {
     this.getPost();
   }
-
-  
 
   render() {
     const { title, img, content, author, profile_pic, post_id } = this.state;
@@ -58,7 +56,11 @@ class Post extends Component {
               <p>{content}</p>
             </div>
           </div>
-          <div><button onClick={() => this.props.deletePost(post_id)}>Delete</button></div>
+          <div>
+            <button onClick={() => this.props.deletePost(post_id)}>
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     );
